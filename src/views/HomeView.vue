@@ -1,18 +1,26 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <h1>RICK AND MORTY API</h1>
+    <Cards :charactersProps="characters" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import Cards from "@/components/Cards.vue";
+import { mapState } from "vuex";
 export default {
-  name: 'HomeView',
+  name: "Home",
   components: {
-    HelloWorld
-  }
-}
+    Cards,
+  },
+  computed: {
+    ...mapState("charactersRAM", ["characters"]),
+  },
+
+  created() {
+    this.$store.dispatch("charactersRAM/getCharacters");
+  },
+};
 </script>
+
+<style></style>
